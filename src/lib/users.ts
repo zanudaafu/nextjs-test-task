@@ -1,5 +1,5 @@
 import { createDbConnection } from './db';
-import { User } from '@/types/user';
+import { type User, UserData } from '@/types/user';
 import { DEFAULT_PAGE_SIZE } from './users.constants';
 
 export const getUsersPage = async (
@@ -37,4 +37,26 @@ export const deleteUserById = async (id: number) => {
   await conn.end();
 };
 
-// TODO add updateUser
+export const createUser = async (newUserData: UserData): Promise<User> => {
+  const conn = await createDbConnection();
+  const [result] = await conn.execute(
+    'INSERT INTO USER (name, email) VALUES (?, ?)',
+    [newUserData.name, newUserData.email]
+  );
+  const id = (result as any).insertId;
+  const [rows] = await conn.execute(`SELECT * FROM USER WHERE id = ${id}`);
+  await conn.end();
+  return (rows as User[])[0];
+};
+
+export const updateUser = async (id: number, user: UserData): Promise<User> => {
+  const conn = await createDbConnection();
+  // TODO: consider what is better to use as user identifier api.id , or user.id - mb handle mismatch
+  await conn.execute(
+    'UPDATE USER SET name = ?, email = ? WHERE id = ?',
+    [user.name, user.email, id]
+  );
+  const [rows] = await conn.execute(`SELECT * FROM USER WHERE id = ${id}`);
+  await conn.end();
+  return (rows as User[])[0];
+};
