@@ -4,12 +4,12 @@ import { useUnsafeDeleteAllUsers } from './useUsersTable'
 import { ConfirmDeleteDialog } from './ConfirmDialogDeleteAllUsers'
 
 interface Props {
-    loadPage: (page: number) => void
+    loadPage: (page?: number) => void
 }
 
 export function UsersTableHeader({ loadPage }: Props) {
     const { deleteAllUsersUNSAFE } = useUnsafeDeleteAllUsers();
-    const deleteAllUsersUNSAFECalback = useCallback(() => deleteAllUsersUNSAFE(() => loadPage(1)), [deleteAllUsersUNSAFE, loadPage])
+    const deleteAllUsersUNSAFECallback = useCallback(() => deleteAllUsersUNSAFE(loadPage), [deleteAllUsersUNSAFE, loadPage])
     return (
         <div className="flex justify-end gap-2">
             <Button variant="outline" className="bg-green-500" onClick={() => {
@@ -17,8 +17,10 @@ export function UsersTableHeader({ loadPage }: Props) {
             }}>
                 Load new
             </Button>
-
-            <ConfirmDeleteDialog onConfirm={deleteAllUsersUNSAFECalback}>
+            {/*
+                YOU! Who decided to place DELETE_ALL near ADD - SHAME ON YOU!
+            */}
+            <ConfirmDeleteDialog onConfirm={deleteAllUsersUNSAFECallback}>
                 <Button variant="outline" className="bg-red-500">Delete All</Button>
             </ConfirmDeleteDialog>
         </div>
