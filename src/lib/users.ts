@@ -25,6 +25,16 @@ export const getUsersPage = async (
   }
 };
 
-// TODO add updateUser
+export const deleteAllUsers = async () => {
+  const conn = await createDbConnection();
+  await conn.execute('DELETE FROM USER');
+  await conn.end();
+};
 
-// TODO add remove all users
+export const deleteUserById = async (id: number) => {
+  const conn = await createDbConnection();
+  await conn.execute(`DELETE FROM USER WHERE id = ${id}`);
+  await conn.end();
+};
+
+// TODO add updateUser

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUsersPage } from '@/lib/users';
+import { getUsersPage, deleteAllUsers } from '@/lib/users';
 import { DEFAULT_PAGE_SIZE } from '@/lib/users.constants';
 
 export async function GET(req: NextRequest) {
@@ -9,4 +9,9 @@ export async function GET(req: NextRequest) {
 
     const data = await getUsersPage(page, pageSize);
     return NextResponse.json(data);
+}
+
+export async function DELETE() {
+    await deleteAllUsers();
+    return NextResponse.json({ message: 'All users deleted.' });
 }
