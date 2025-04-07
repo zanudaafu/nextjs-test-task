@@ -7,7 +7,7 @@
         
     */
     *:focus-visible {
-        outline: 1.5px solid Highlight !important;
+        outline: 2px solid Highlight !important;
         outline-offset: 2px !important;
     }
 }
