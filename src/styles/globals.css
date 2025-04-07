@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    /* TODO: find out why this don't work without !important 
+        
+    */
+    *:focus-visible {
+        outline: 1.5px solid Highlight !important;
+        outline-offset: 2px !important;
+    }
+}
