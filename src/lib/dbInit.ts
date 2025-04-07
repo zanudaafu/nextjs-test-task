@@ -1,6 +1,7 @@
 import { createDbConnection } from './db';
 import { Connection } from 'mysql2/promise';
 import { tableExists, createUserTable, userCount, insertDummyUsers } from './dbUtils';
+import "./env";
 
 const initDb = async () => {
     let db: Connection;
@@ -25,4 +26,4 @@ const initDb = async () => {
     await db.end();
 };
 
-initDb();
+process.env.DEV_POPULATE_DB_ON_START_IF_EMPTY && initDb();

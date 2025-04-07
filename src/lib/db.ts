@@ -1,6 +1,5 @@
 import mysql, { Connection } from 'mysql2/promise';
-import dotenv from 'dotenv';
-dotenv.config(); // todo mb move to separate module
+import './env';
 
 export const createDbConnection = async (): Promise<Connection> => {
     const config = {
