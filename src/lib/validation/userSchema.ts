@@ -11,6 +11,7 @@ export function isValidEmail(email: unknown): email is UserData['email'] {
     return (
         typeof email === 'string' &&
         // TODO: ADD MORE ADVANCED email validation
+        // TODO: ADD validation to is email uniq in DB - if necessary - maybe in separate file
         // Validates a simple email format:
         // ^           - start of string
         // [^@\s]+     - one or more characters that are NOT "@" or whitespace (local part)

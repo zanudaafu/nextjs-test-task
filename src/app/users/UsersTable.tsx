@@ -13,7 +13,7 @@ interface Props {
 
 export function UsersTable({ users, isLoading = false, onDeleteUser, onEditUser }: Props) {
     const { editingUser, setEditingUser, clearEditingUser, onEditConfirm } = useEditUserModal(onEditUser);
-    const onSubmitForm = useCallback((user:UserData) => onEditConfirm(user),[onEditConfirm]);
+    const onSubmitForm = useCallback((user: UserData) => onEditConfirm(user), [onEditConfirm]);
 
     return (
         <>
@@ -54,8 +54,6 @@ export function UsersTable({ users, isLoading = false, onDeleteUser, onEditUser 
                 onSubmit={onSubmitForm}
                 onClose={clearEditingUser}
                 isOpen={!!editingUser}
-            // onSubmit={editingUser}
-            // onOpenChange={setEditOpen}
             />)
             }
         </>

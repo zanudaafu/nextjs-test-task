@@ -26,10 +26,10 @@ export function useUsersTable() {
     const pageSize = useMemo(() => DEFAULT_PAGE_SIZE, []);
     const totalPages = useMemo(() => Math.ceil(total / pageSize), [total, pageSize]);
 
-    const loadPage = useCallback(async (pageNumber = page) => {
+    const loadPage = useCallback(async () => {
         setIsLoading(true); // TODO: Add debounce to loading
         try {
-            const res = await fetch(`/api/users?page=${pageNumber}&pageSize=${pageSize}`);
+            const res = await fetch(`/api/users?page=${page}&pageSize=${pageSize}`);
             const data = await res.json();
             setUsers(data.users);
             setTotal(data.total);
@@ -39,7 +39,7 @@ export function useUsersTable() {
         } finally {
             setIsLoading(false);
         }
-    }, [setIsLoading, setUsers, setTotal, setIsLoading]);
+    }, [setIsLoading, setUsers, setTotal, setIsLoading, page, pageSize]);
 
     const deleteUser = useCallback(async (user: User) => {
         try {
@@ -64,8 +64,8 @@ export function useUsersTable() {
             console.error('Failed to create user', err);
             // TODO: show message (toast) on error
         }
-        await loadPage(totalPages); // refresh data
-    }, [page, loadPage]);
+        await setPage(totalPages); // refresh data
+    }, [page, setPage]);
 
     const editUser: EditUserCallback = useCallback(async (userID: UserMetaData['id'], userData: UserData) => {
         // TODO: mb add validation here also (for big project)
@@ -96,7 +96,6 @@ export function useUsersTable() {
         totalPages,
         isLoading,
         setPage,
-        loadPage,
         createUser,
         editUser,
         deleteUser
