@@ -2,8 +2,8 @@ import '@/styles/globals.css';
 import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata = {
-    title: 'Test',
-    description: 'Test Tailwind',
+    title: 'Zanuda test',
+    description: 'Test task of nextjs for Zanuda',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
