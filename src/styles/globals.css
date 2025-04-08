@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+
     /* TODO: find out why this don't work without !important 
         
     */

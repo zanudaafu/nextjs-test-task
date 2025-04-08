@@ -30,11 +30,11 @@ export const userCount = async (conn: Connection): Promise<number> => {
 
 export const insertDummyUsers = async (conn: Connection): Promise<void> => {
     const inserts = (mockUsers as User[]).map(user =>
-      conn.execute(
-        `INSERT INTO USER (id, name, email, created_at) VALUES (?, ?, ?, ?)`,
-        [user.id, user.name, user.email, user.created_at]
-      )
+        conn.execute(
+            `INSERT INTO USER (id, name, email, created_at) VALUES (?, ?, ?, ?)`,
+            [user.id, user.name, user.email, user.created_at]
+        )
     );
     await Promise.all(inserts);
     console.log(`Inserted ${mockUsers.length} mock users.`);
-  };
+};

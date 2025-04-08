@@ -21,7 +21,7 @@ export function UserRow({ user, onDelete, onSetEditingUser }: Props) {
             <TableCell className="text-muted-foreground">{user.email}</TableCell>
             <TableCell className="text-right">{new Date(user.created_at).toLocaleDateString()}</TableCell>
             <TableCell className="text-right">
-                <Button size="sm" className="bg-yellow-500" onClick={() => {onSetEditingUser(user)}}>Edit<Pen className="h-4 w-4" /></Button>
+                <Button size="sm" className="bg-yellow-500" onClick={() => { onSetEditingUser(user) }}>Edit<Pen className="h-4 w-4" /></Button>
                 <ConfirmDeleteDialog user={user} onConfirm={onDelete}>
                     <Button variant="destructive" size="sm" className="bg-red-500">Delete <Trash2 className="h-4 w-4" /></Button>
                 </ConfirmDeleteDialog>
