@@ -5,8 +5,10 @@ import { useBulkUserUpload } from './useBulkUserUpload';
 import mockUsers from './../../../mocks/users.mock.json';
 import * as XLSX from 'xlsx';
 import { UserData } from '@/types/user';
+import { useTranslations } from 'next-intl';
 
 export function UserBulkUploadDialog({ children, onLoadingDoneCallback }: { children: React.ReactNode, onLoadingDoneCallback: Function }) {
+    const t = useTranslations('users.dialog.bulkUpload');
     const { upload, progress, total, isUploading, errors } = useBulkUserUpload();
     const [open, setOpen] = useState(false);
     const [previewData, setPreviewData] = useState<UserData[]>([]);
@@ -49,29 +51,30 @@ export function UserBulkUploadDialog({ children, onLoadingDoneCallback }: { chil
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>{children}</DialogTrigger>
-            <DialogContent className="bg-zinc-900 text-white max-h-[90vh] overflow-auto">
-                <DialogTitle>Bulk User Upload</DialogTitle>
+            <DialogContent className="bg-zinc-900 text-white max-h-[90vh] max-w-[70vh] overflow-auto">
+                <DialogTitle>{t("title")}</DialogTitle>
 
                 <div className="flex flex-col gap-4">
                     <div className="flex items-center gap-4">
                         <Button disabled={isUploading} onClick={() => handleUpload(mockUsers)} className="bg-yellow-600">
-                            {isUploading ? 'Uploading...' : 'Load default set'}
+                            {isUploading ? t("uploading") : t("loadDefaultSet")}
                         </Button>
                     </div>
                     <div className="flex items-center gap-4">
-                        <input type="file" accept=".xlsx,.xls" onChange={handleFileChange} />
+                        {/* TODO: add internationalization - it requires complex update if input-file component*/}
+                        <input type="file" accept=".xlsx,.xls" onChange={handleFileChange} className="border border-white-500" />
                         <Button
                             disabled={isUploading || previewData.length === 0}
                             className={isUploading || previewData.length === 0 ? "" : "bg-green-600"}
                             onClick={() => handleUpload(previewData)}
                         >
-                            {isUploading ? 'Uploading...' : 'Upload from file'}
+                            {isUploading ? t("uploading") : t("loadFromFile")}
                         </Button>
                     </div>
 
                     {isUploading && (
                         <p className="text-sm text-muted-foreground">
-                            Uploading... {progress} of {total} batches
+                            {t("uploading")}{' '}{progress}{t("progressFrom")}{total}{t("progressBatches")}
                         </p>
                     )}
 
@@ -86,9 +89,9 @@ export function UserBulkUploadDialog({ children, onLoadingDoneCallback }: { chil
                             <table className="w-full text-left">
                                 <thead>
                                     <tr>
-                                        <th className="pr-4">№</th>
-                                        <th className="pr-4">Name</th>
-                                        <th className="pr-4">Email</th>
+                                        <th className="pr-4">{t('tableN')}</th>
+                                        <th className="pr-4">{t('tableName')}</th>
+                                        <th className="pr-4">{t('tableEmail')}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -107,7 +110,7 @@ export function UserBulkUploadDialog({ children, onLoadingDoneCallback }: { chil
 
                 <DialogFooter>
                     <Button variant="outline" onClick={() => setOpen(false)}>
-                        Close
+                        {t('cancel')}
                     </Button>
                 </DialogFooter>
             </DialogContent>

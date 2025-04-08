@@ -6,6 +6,7 @@ import { Label } from '@/components/label';
 import type { User, UserData } from '@/types/user';
 import { isValidEmail, isValidName } from '@/lib/validation/userSchema';
 import { EditUserCallback } from './useUsersTable';
+import { useTranslations } from 'next-intl';
 
 interface Props {
     user?: User;
@@ -45,6 +46,7 @@ export function useEditUserModal(onEditUserConfirmCallback: EditUserCallback) {
 // but this one definitely requires being refactored in future
 // maybe consider using react-portals.
 export function UserFormDialog({ user, onSubmit, onClose, children, isOpen = false }: Props) {
+    const t = useTranslations('users.dialog.userForm');
     const [open, setOpen] = useState(false);
     const onOpenChange = useCallback((isOpen: boolean) => {
         setOpen(isOpen);
@@ -80,9 +82,9 @@ export function UserFormDialog({ user, onSubmit, onClose, children, isOpen = fal
         e.preventDefault();
 
         const newErrors: typeof errors = {};
-        if (!isValidName(formUser.name)) newErrors.name = 'Name is required';
-        if (!isValidEmail(formUser.email)) newErrors.email = 'Invalid email address';
-
+        // TODO: add i18n to tooltips of errors
+        if (!isValidName(formUser.name)) newErrors.name = t('errorName');
+        if (!isValidEmail(formUser.email)) newErrors.email = t('errorEmail');
 
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
@@ -107,14 +109,14 @@ export function UserFormDialog({ user, onSubmit, onClose, children, isOpen = fal
                     <div>
 
                         <div className="mt-2 mb-2">
-                            {user?.id && (<div>ID: <span>{user.id}</span></div>)}
-                            {user?.created_at && (<div>Created At: <span>{new Date(user.created_at).toLocaleDateString()}</span></div>)}
-                            {user?.name && (<div>Original name: <span>{user.name}</span></div>)}
-                            {user?.email && (<div>Original email: <span>{user.email}</span></div>)}
+                            {user?.id && (<div>{t('labelID')}<span>{user.id}</span></div>)}
+                            {user?.created_at && (<div>{t('labelDate')}<span>{new Date(user.created_at).toLocaleDateString()}</span></div>)}
+                            {user?.name && (<div>{t('labelOName')}<span>{user.name}</span></div>)}
+                            {user?.email && (<div>{t('labelOEmail')}<span>{user.email}</span></div>)}
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="name">Name</Label>
+                            <Label htmlFor="name">{t('labelName')}</Label>
                             <Input
                                 id="name"
                                 value={formUser.name}
@@ -126,7 +128,7 @@ export function UserFormDialog({ user, onSubmit, onClose, children, isOpen = fal
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="email">Email</Label>
+                            <Label htmlFor="email">{t('labelEmail')}</Label>
                             <Input
                                 id="email"
                                 type="email"
@@ -140,9 +142,9 @@ export function UserFormDialog({ user, onSubmit, onClose, children, isOpen = fal
 
                     <DialogFooter className="mt-4">
                         <DialogClose asChild>
-                            <Button variant="outline" onClick={clearUserForm}>Cancel</Button>
+                            <Button variant="outline" onClick={clearUserForm}>{t('cancel')}</Button>
                         </DialogClose>
-                        <Button className="bg-green-500" type="submit">{isEdit ? 'Update' : 'Create'}</Button>
+                        <Button className="bg-green-500" type="submit">{isEdit ? t('update') : t('create')}</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>

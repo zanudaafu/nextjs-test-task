@@ -1,6 +1,79 @@
 {
     "users": {
         "title": "Користувачі",
-        "add": "Додати користувача"
+        "dialog": {
+            "deleteAll": {
+                "title1": "Ви впевнені що бажаєте видалити ",
+                "title2": "УСІХ",
+                "title3": " користувачів",
+                "cancel": "Cancel",
+                "confirm1": "Видалити ",
+                "confirm2": "УСІХ",
+                "confirm3": " користувачів"
+            },
+            "deleteUser": {
+                "title": "Ви впевнені що бажаєте видалити користувача ",
+                "cancel": "Відміна",
+                "confirm": "Видалити"
+            },
+            "bulkUpload": {
+                "title": "Пакетне завантаження користувачів",
+                "uploading": "Завантаження...",
+                "loadDefaultSet": "Завантажити набор за замовчуванням",
+                "loadFromFile": "Завантажити з файлу",
+                "progressFrom": " з ",
+                "progressBatches": " пакетів",
+                "tableN": "№",
+                "tableName": "Ім'я",
+                "tableEmail": "Email",
+                "cancel": "Закрити"
+            },
+            "userForm": {
+                "errorName": "Ім'я обов'язково",
+                "errorEmail": "Недопустима адреса електронної пошти (email)",
+                "labelID": "ID: ",
+                "labelDate": "Дата створення: ",
+                "labelOName": "Почасткове Ім'я: ",
+                "labelOEmail": "Початковий email: ",
+                "labelName": "Ім'я",
+                "labelEmail": "Email",
+                "cancel": "Відміна",
+                "update": "Зберегти",
+                "create": "Створити"
+            }
+        },
+        "table": {
+            "userRow": {
+                "buttonEdit": "Редагувати",
+                "buttonDelete": "Видалити"
+            },
+            "headerRow": {
+                "id": "ID",
+                "name": "Ім'я",
+                "email": "Email",
+                "createdAt": "Дата створення",
+                "actions": "Дії"
+            },
+            "noUsersMessage": "Не знайдено жодних користувачів.",
+            "loadingMessage": "Завантаження...",
+            "globalActions": {
+                "create": "Створити користувача",
+                "load": "Завантижити нових",
+                "deleteAll": "Видалити усіх"
+            },
+            "pagination": {
+                "first": "На початок",
+                "previous": "Попередня",
+                "next": "Наступна",
+                "last": "Остання",
+                "pageN": "Сторінка ",
+                "pageOf": " з "
+            }
+        }
+    },
+    "404": {
+        "title": "404 – Сторінка не знайдена",
+        "sorryMessage": "На жаль, нам не вдалося знайти сторінку, яку ви шукаєте. Можливо, його було переміщено або видалено.",
+        "goToUsersButton": "Перейnb на сторінку користувачів"
     }
 }

@@ -4,6 +4,7 @@ import { UserRow } from './UserRow';
 import { UserFormDialog, useEditUserModal } from './UserFormDialog';
 import type { EditUserCallback } from './useUsersTable';
 import { useCallback } from 'react';
+import { useTranslations } from 'next-intl';
 interface Props {
     users: User[];
     isLoading?: boolean;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export function UsersTable({ users, isLoading = false, onDeleteUser, onEditUser }: Props) {
+    const t = useTranslations('users.table');
     const { editingUser, setEditingUser, clearEditingUser, onEditConfirm } = useEditUserModal(onEditUser);
     const onSubmitForm = useCallback((user: UserData) => onEditConfirm(user), [onEditConfirm]);
 
@@ -20,18 +22,18 @@ export function UsersTable({ users, isLoading = false, onDeleteUser, onEditUser 
             <Table>
                 <TableHeader className="bg-muted/60">
                     <TableRow>
-                        <TableHead className="w-20">ID</TableHead>
-                        <TableHead>Name</TableHead>
-                        <TableHead>Email</TableHead>
-                        <TableHead className="text-right">Created At</TableHead>
-                        <TableHead className="text-right">Actions</TableHead>
+                        <TableHead className="w-20">{t('headerRow.id')}</TableHead>
+                        <TableHead>{t('headerRow.name')}</TableHead>
+                        <TableHead>{t('headerRow.email')}</TableHead>
+                        <TableHead className="text-right">{t('headerRow.createdAt')}</TableHead>
+                        <TableHead className="text-right">{t('headerRow.actions')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {users.length === 0 && !isLoading && (
                         <TableRow>
                             <TableCell colSpan={4} className="text-center py-6 text-muted-foreground">
-                                No users found.
+                                {t('noUsersMessage')}
                             </TableCell>
                         </TableRow>
                     )}
@@ -39,7 +41,7 @@ export function UsersTable({ users, isLoading = false, onDeleteUser, onEditUser 
                         // TODO: Add debounce to loading
                         <TableRow>
                             <TableCell colSpan={4} className="text-center py-6 text-muted-foreground">
-                                Loading...
+                                {t('loadingMessage')}
                             </TableCell>
                         </TableRow>
                     )}

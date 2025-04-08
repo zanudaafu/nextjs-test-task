@@ -1,4 +1,5 @@
 import { Button } from '@/components/button';
+import { useTranslations } from 'next-intl';
 
 interface Props {
     page: number;
@@ -7,20 +8,21 @@ interface Props {
 }
 
 export function PaginationControls({ page, totalPages, setPage }: Props) {
+    const t = useTranslations('users.table.pagination');
     return (
         <div className="flex flex-wrap justify-between items-center gap-4 pt-2 border-t max-w-6xl mx-auto">
             <div className="flex gap-2">
                 <Button variant="outline" onClick={() => setPage(1)} disabled={page === 1}>
-                    First
+                    {t('first')}
                 </Button>
                 <Button variant="outline" onClick={() => setPage(Math.max(page - 1, 1))} disabled={page === 1}>
-                    Previous
+                    {t('previous')}
                 </Button>
             </div>
 
             {/* // TODO: consider show item numbers instead of page numbers */}
             <div className="text-sm text-muted-foreground">
-                Page {page} of {totalPages}
+                {t('pageN')}{page}{t('pageOf')}{totalPages}
             </div>
 
             <div className="flex gap-2">
@@ -29,14 +31,14 @@ export function PaginationControls({ page, totalPages, setPage }: Props) {
                     onClick={() => setPage(Math.min(page + 1, totalPages))}
                     disabled={page === totalPages}
                 >
-                    Next
+                    {t('next')}
                 </Button>
                 <Button
                     variant="outline"
                     onClick={() => setPage(totalPages)}
                     disabled={page === totalPages}
                 >
-                    Last
+                    {t('last')}
                 </Button>
             </div>
         </div>

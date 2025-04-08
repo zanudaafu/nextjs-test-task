@@ -1,6 +1,79 @@
 {
     "users": {
         "title": "Users",
-        "add": "Add User"
+        "dialog": {
+            "deleteAll": {
+                "title1": "Are you sure you want to delete ",
+                "title2": "ALL",
+                "title3": " users?",
+                "cancel": "Cancel",
+                "confirm1": "DELETE ",
+                "confirm2": "ALL",
+                "confirm3": " users"
+            },
+            "deleteUser": {
+                "title": "Are you sure you want to delete user ",
+                "cancel": "Cancel",
+                "confirm": "Delete"
+            },
+            "bulkUpload": {
+                "title": "Bulk User Upload",
+                "uploading": "Uploading...",
+                "loadDefaultSet": "Load default set",
+                "loadFromFile": "Upload from file",
+                "progressFrom": " of ",
+                "progressBatches": " batches",
+                "tableN": "#",
+                "tableName": "Name",
+                "tableEmail": "Email",
+                "cancel": "Close"
+            },
+            "userForm": {
+                "errorName": "Name is required",
+                "errorEmail": "Invalid email address",
+                "labelID": "ID: ",
+                "labelDate": "Created At: ",
+                "labelOName": "Original name: ",
+                "labelOEmail": "Original email: ",
+                "labelName": "Name",
+                "labelEmail": "Email",
+                "cancel": "Cancel",
+                "update": "Update",
+                "create": "Create"
+            }
+        },
+        "table": {
+            "userRow": {
+                "buttonEdit": "Edit",
+                "buttonDelete": "Delete"
+            },
+            "headerRow": {
+                "id": "ID",
+                "name": "Name",
+                "email": "Email",
+                "createdAt": "Created At",
+                "actions": "Actions"
+            },
+            "noUsersMessage": "No users found.",
+            "loadingMessage": "Loading...",
+            "globalActions": {
+                "create": "Create user",
+                "load": "Load new",
+                "deleteAll": "Delete All"
+            },
+            "pagination": {
+                "first": "First",
+                "previous": "Previous",
+                "next": "Next",
+                "last": "Last",
+                "pageN": "Page ",
+                "pageOf": " of "
+            }
+        }
+    },
+    "404": {
+        "title": "404 – Page Not Found",
+        "sorryMessage": "Sorry, we couldn’t find the page you’re looking for. It might have been moved or deleted.",
+        "goToUsersButton": "Go to Users Page"
     }
 }
