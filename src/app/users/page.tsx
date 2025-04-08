@@ -6,18 +6,22 @@ import { PaginationControls } from "./UsersPagination"
 
 import { useUsersTable } from './useUsersTable';
 
+import { useTranslations } from 'next-intl';
+
+
 export default function UsersPage() {
+    const t = useTranslations('users');
     const { users, page, totalPages, isLoading, setPage, deleteUser, createUser, editUser } = useUsersTable()
 
     return (
         <div className="p-6 space-y-4">
-            <h1 className="text-2xl font-bold max-w-6xl mx-auto">Users</h1>
+            <h1 className="text-2xl font-bold max-w-6xl mx-auto">{t('title')}</h1>
             <div className="max-w-6xl mx-auto">
-                <UsersTableHeader setPage={setPage} totalPages={totalPages} createUser={createUser}/>
+                <UsersTableHeader setPage={setPage} totalPages={totalPages} createUser={createUser} />
             </div>
 
             <div className="rounded-md border max-w-6xl mx-auto">
-                <UsersTable users={users} isLoading={isLoading} onDeleteUser={deleteUser} onEditUser={editUser}/>
+                <UsersTable users={users} isLoading={isLoading} onDeleteUser={deleteUser} onEditUser={editUser} />
             </div>
 
             <PaginationControls page={page} totalPages={totalPages} setPage={setPage} />
